@@ -172,26 +172,70 @@
 
     </div>
 
-    <script>
-        document.getElementById("signupForm")
-        .addEventListener("submit", function(event) {
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+       
+<script>
+  // Connect to our Supabase project
+  const supabaseClient = window.supabase.createClient(
+    "https://zkescnnhcszurjakichz.supabase.co",
+    "PASTE_YOUR_PUBLISHABLE_KEY_HERE"
+  );
 
-            event.preventDefault();
+  // Get the signup form
+  const signupForm = document.getElementById("signupForm");
+  const message = document.getElementById("message");
 
-            let name = document.getElementById("name").value;
-            let password = document.getElementById("password").value;
-            let confirmPassword =
-            document.getElementById("confirmPassword").value;
+  signupForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-            if (password !== confirmPassword) {
-                document.getElementById("message").textContent =
-                "Passwords do not match!";
-            } else {
-                alert("Welcome to X's & O's, " + name + "!");
-                window.location.href = "homepage.html";
-            }
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword =
+      document.getElementById("confirmPassword").value;
 
-        });
+    // Check that passwords match
+    if (password !== confirmPassword) {
+      message.textContent = "Passwords do not match!";
+      return;
+    }
+
+    message.textContent = "Creating your account...";
+
+    // Register the student using Supabase
+    try {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: name
+          },
+          emailRedirectTo:
+            new URL("xs%26os.html", window.location.href).href
+        }
+      });
+
+      if (error) {
+        message.textContent = error.message;
+        return;
+      }
+
+      if (data.session) {
+        message.textContent = "Account created successfully!";
+      } else {
+        message.textContent =
+          "Please check your email to confirm your account.";
+      }
+
+    } catch (error) {
+      message.textContent =
+        "Unable to connect. Please try again.";
+      console.error(error);
+    }
+  });
+</script>
+
     </script>
 
 </body>
