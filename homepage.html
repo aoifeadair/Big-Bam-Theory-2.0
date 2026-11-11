@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X's & O's - Home</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fff5fa;
+            color: #333;
+        }
+
+        header {
+            background: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: bold;
+            color: #e754a6;
+        }
+
+        .logo span {
+            color: #9163d9;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #e754a6;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 45px 20px;
+            background: linear-gradient(135deg, #ffb6d9, #b58cff);
+            color: white;
+        }
+
+        .welcome h1 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .welcome p {
+            font-size: 17px;
+        }
+
+        .section {
+            padding: 35px 7%;
+        }
+
+        .section h2 {
+            color: #b34b91;
+            margin-bottom: 20px;
+        }
+
+        .matches {
+            display: grid;
+            grid-template-columns:
+            repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .profile-image {
+            height: 170px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+            background: linear-gradient(135deg, #ffd1e5, #d8c2ff);
+        }
+
+        .profile-card h3 {
+            margin: 15px 0 5px;
+        }
+
+        .profile-card p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background: linear-gradient(90deg, #e754a6, #9163d9);
+            border: none;
+            padding: 11px 25px;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .games {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .games h2 {
+            margin-bottom: 15px;
+        }
+
+        .game-symbols {
+            font-size: 45px;
+            color: #e754a6;
+            margin: 15px;
+            letter-spacing: 12px;
+        }
+
+        .game-description {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+            }
+
+            nav a {
+                margin: 8px;
+            }
+
+            .welcome h1 {
+                font-size: 27px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">X's <span>&</span> O's</div>
+
+        <nav>
+           <a href="homepage.html">Home</a>
+            <a href="#matches">Discover</a>
+            <a href="#games">Games</a>
+            <a href="xs&os.html">Log Out</a>
+        </nav>
+
+    </header>
+
+    <section class="welcome">
+
+        <h1>Welcome to X's & O's! 💗</h1>
+
+        <p>
+            Meet new people, make connections
+            and let the games begin!
+        </p>
+
+    </section>
+
+    <section class="section" id="matches">
+
+        <h2>Discover Your Matches 💕</h2>
+
+        <div class="matches">
+
+            <div class="profile-card">
+                <div class="profile-image">👩🏻</div>
+                <h3>Alex, 21</h3>
+                <p>Love music and travelling</p>
+                <button onclick="likeProfile('Alex')">
+                    Like ♥
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image">👨🏻</div>
+                <h3>Jamie, 22</h3>
+                <p>Gaming and movie lover</p>
+                <button onclick="likeProfile('Jamie')">
+                    Like ♥
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image">👩🏽</div>
+                <h3>Taylor, 20</h3>
+                <p>Adventure and coffee lover</p>
+                <button onclick="likeProfile('Taylor')">
+                    Like ♥
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section" id="games">
+
+        <div class="games">
+
+            <h2>Let's Play a Game! 🎮</h2>
+
+            <div class="game-symbols">
+                X O X O
+            </div>
+
+            <p class="game-description">
+                Get to know someone through fun games.
+                Because every great connection starts
+                with a little fun!
+            </p>
+
+            <button onclick="startGame()">
+                Play X's & O's
+            </button>
+
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 X's & O's | Find your match, play your game. 💗
+    </footer>
+
+    <script>
+
+        function likeProfile(name) {
+            alert("You liked " + name + "! 💗");
+        }
+
+        function startGame() {
+            alert("Your X's & O's game is coming soon!");
+        }
+
+    </script>
+
+</body>
+</html>

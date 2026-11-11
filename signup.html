@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X's & O's - Sign Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffb6d9, #b58cff);
+            padding: 20px;
+        }
+
+        .signup-container {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            color: #e754a6;
+            margin-bottom: 15px;
+        }
+
+        .logo span {
+            color: #9163d9;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #e754a6;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #e754a6, #9163d9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            opacity: 0.85;
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .login {
+            margin-top: 22px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        a {
+            color: #e754a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #d63384;
+        }
+
+        #message.success {
+            color: #21835a;
+        }
+
+        .email-hint {
+            color: #888;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <div class="logo">X's <span>&</span> O's</div>
+
+        <h2>Create Your Account</h2>
+
+        <p class="subtitle">
+            Your next connection starts here! 💗
+            <br>
+            Exclusively for ATU students.
+        </p>
+
+        <form id="signupForm">
+
+            <div class="input-box">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <label for="email">ATU Student Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="g12345678@atu.ie"
+                    autocomplete="email"
+                    required
+                >
+                <p class="email-hint">
+                    You must use your ATU student email.
+                </p>
+            </div>
+
+            <div class="input-box">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="input-box">
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="signup-btn"
+                id="signupButton"
+            >
+                Create Account
+            </button>
+
+            <p id="message" role="status" aria-live="polite"></p>
+
+        </form>
+
+        <p class="login">
+            Already have an account?
+            <a href="xs&os.html">Log In</a>
+        </p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+
+        const SUPABASE_URL =
+            "https://zkescnnhcszurjakichz.supabase.co";
+
+        const SUPABASE_KEY =
+            "sb_publishable_-JEBCj3Tl9wcog3N9Pd-zQ__ZZR6j1W";
+
+        const supabaseClient = window.supabase
+            ? window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            )
+            : null;
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+        const message =
+            document.getElementById("message");
+
+        const signupButton =
+            document.getElementById("signupButton");
+
+        signupForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+                message.classList.remove("success");
+
+                const name =
+                    document.getElementById("name").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim().toLowerCase();
+
+                const password =
+                    document.getElementById("password").value;
+
+                const confirmPassword =
+                    document.getElementById("confirmPassword").value;
+
+                const atuEmailPattern = /^g\d{8}@atu\.ie$/;
+
+                if (!atuEmailPattern.test(email)) {
+                    message.textContent =
+                        "Only ATU students can register. Please use your student email (g12345678@atu.ie).";
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    message.textContent =
+                        "Passwords do not match!";
+                    return;
+                }
+
+                if (password.length < 8) {
+                    message.textContent =
+                        "Password must be at least 8 characters.";
+                    return;
+                }
+
+                if (!supabaseClient) {
+                    message.textContent =
+                        "Unable to load Supabase. Check your internet connection.";
+                    return;
+                }
+
+                signupButton.disabled = true;
+                signupButton.textContent = "Creating Account...";
+
+                message.textContent =
+                    "Please wait while we create your account.";
+
+                try {
+
+                    const { data, error } =
+                        await supabaseClient.auth.signUp({
+
+                            email: email,
+
+                            password: password,
+
+                            options: {
+
+                                data: {
+                                    full_name: name
+                                },
+
+                                emailRedirectTo:
+                                    new URL(
+                                        "xs%26os.html",
+                                        window.location.href
+                                    ).href
+
+                            }
+
+                        });
+
+                    if (error) {
+                        message.textContent = error.message;
+                        return;
+                    }
+
+                    message.classList.add("success");
+
+                    if (data.session) {
+
+                        message.textContent =
+                            "Account created successfully! You can now log in.";
+
+                    } else {
+
+                        message.textContent =
+                            "Please check your ATU email to verify your account! 💗";
+
+                    }
+
+                    document.getElementById("password").value = "";
+                    document.getElementById("confirmPassword").value = "";
+
+                } catch (error) {
+
+                    console.error("Registration error:", error);
+
+                    message.textContent =
+                        "Something went wrong. Please try again.";
+
+                } finally {
+
+                    signupButton.disabled = false;
+                    signupButton.textContent = "Create Account";
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
