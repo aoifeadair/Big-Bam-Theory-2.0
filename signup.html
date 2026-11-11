@@ -128,6 +128,12 @@
         #message.success {
             color: #21835a;
         }
+
+        .email-hint {
+            color: #888;
+            font-size: 12px;
+            margin-top: 6px;
+        }
     </style>
 </head>
 
@@ -141,6 +147,8 @@
 
         <p class="subtitle">
             Your next connection starts here! 💗
+            <br>
+            Exclusively for ATU students.
         </p>
 
         <form id="signupForm">
@@ -157,14 +165,17 @@
             </div>
 
             <div class="input-box">
-                <label for="email">Email Address</label>
+                <label for="email">ATU Student Email</label>
                 <input
                     type="email"
                     id="email"
-                    placeholder="Enter your email"
+                    placeholder="g12345678@atu.ie"
                     autocomplete="email"
                     required
                 >
+                <p class="email-hint">
+                    You must use your ATU student email.
+                </p>
             </div>
 
             <div class="input-box">
@@ -180,7 +191,9 @@
             </div>
 
             <div class="input-box">
-                <label for="confirmPassword">Confirm Password</label>
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
                 <input
                     type="password"
                     id="confirmPassword"
@@ -248,13 +261,21 @@
                     document.getElementById("name").value.trim();
 
                 const email =
-                    document.getElementById("email").value.trim();
+                    document.getElementById("email").value.trim().toLowerCase();
 
                 const password =
                     document.getElementById("password").value;
 
                 const confirmPassword =
                     document.getElementById("confirmPassword").value;
+
+                const atuEmailPattern = /^g\d{8}@atu\.ie$/;
+
+                if (!atuEmailPattern.test(email)) {
+                    message.textContent =
+                        "Only ATU students can register. Please use your student email (g12345678@atu.ie).";
+                    return;
+                }
 
                 if (password !== confirmPassword) {
                     message.textContent =
@@ -270,7 +291,7 @@
 
                 if (!supabaseClient) {
                     message.textContent =
-                        "Unable to load Supabase. Check your connection.";
+                        "Unable to load Supabase. Check your internet connection.";
                     return;
                 }
 
@@ -300,6 +321,7 @@
                                         "xs%26os.html",
                                         window.location.href
                                     ).href
+
                             }
 
                         });
@@ -319,7 +341,7 @@
                     } else {
 
                         message.textContent =
-                            "Please check your email to confirm your account! 💗";
+                            "Please check your ATU email to verify your account! 💗";
 
                     }
 
