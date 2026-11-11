@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X's & O's | Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffb6d9, #b58cff);
+        }
+
+        .login-container {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: #e754a6;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: #9163d9;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .input-box {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 7px;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .input-box input:focus {
+            border-color: #e754a6;
+        }
+
+        .forgot {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot a {
+            color: #a15bd6;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #e754a6, #9163d9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            opacity: 0.85;
+        }
+
+        .signup {
+            margin-top: 22px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup a {
+            color: #e754a6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .message {
+            margin-top: 15px;
+            color: #d63384;
+            font-size: 14px;
+        }
+
+        .xo {
+            margin-top: 25px;
+            color: #e754a6;
+            font-size: 22px;
+            letter-spacing: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="logo">X's <span>&</span> O's</div>
+
+        <h2>Welcome Back!</h2>
+
+        <p class="subtitle">
+            Find your match. Play your game. 💗
+        </p>
+
+        <form id="loginForm">
+
+            <div class="input-box">
+                <label for="email">Email Address</label>
+                <input type="email" id="email"
+                placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-box">
+                <label for="password">Password</label>
+                <input type="password" id="password"
+                placeholder="Enter your password" required>
+            </div>
+
+            <div class="forgot">
+                <a href="#" onclick="forgotPassword(event)">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Log In
+            </button>
+
+            <p class="message" id="message"></p>
+
+        </form>
+
+        <div class="signup">
+            Don't have an account?
+            <a href="signup.html">Sign Up</a>
+        </div>
+
+        <div class="xo">X O X O</div>
+
+    </div>
+
+    <script>
+        document.getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            if (email && password) {
+                document.getElementById("message").textContent =
+                "Login form submitted successfully!";
+            }
+
+        });
+
+        function forgotPassword(event) {
+            event.preventDefault();
+            document.getElementById("message").textContent =
+            "Please contact support to reset your password.";
+        }
+    </script>
+
+</body>
+</html>

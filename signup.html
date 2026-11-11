@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X's & O's - Sign Up</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffb6d9, #b58cff);
+            padding: 20px;
+        }
+
+        .signup-container {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            color: #e754a6;
+            margin-bottom: 15px;
+        }
+
+        .logo span {
+            color: #9163d9;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #e754a6;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #e754a6, #9163d9);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            opacity: 0.85;
+        }
+
+        .login {
+            margin-top: 22px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        a {
+            color: #e754a6;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #message {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #d63384;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-container">
+
+        <div class="logo">X's <span>&</span> O's</div>
+
+        <h2>Create Your Account</h2>
+
+        <p class="subtitle">
+            Your next connection starts here! 💗
+        </p>
+
+        <form id="signupForm">
+
+            <div class="input-box">
+                <label>Full Name</label>
+                <input type="text" id="name"
+                placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-box">
+                <label>Email Address</label>
+                <input type="email" id="email"
+                placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" id="password"
+                placeholder="Create a password"
+                minlength="8" required>
+            </div>
+
+            <div class="input-box">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword"
+                placeholder="Confirm your password"
+                minlength="8" required>
+            </div>
+
+            <button type="submit" class="signup-btn">
+                Create Account
+            </button>
+
+            <p id="message"></p>
+
+        </form>
+
+        <p class="login">
+            Already have an account?
+          <a href="xs&os.html">Log In</a>
+        </p>
+
+    </div>
+
+    <script>
+        document.getElementById("signupForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                document.getElementById("message").textContent =
+                "Passwords do not match!";
+            } else {
+                alert("Welcome to X's & O's, " + name + "!");
+                window.location.href = "homepage.html";
+            }
+
+        });
+    </script>
+
+</body>
+</html>
